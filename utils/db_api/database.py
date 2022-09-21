@@ -1,5 +1,3 @@
-from typing import Union
-
 import asyncpg
 from asyncpg import Connection
 from asyncpg.pool import Pool
@@ -8,16 +6,18 @@ from data import config
 
 
 class DataBase:
-    def __init__(self):
-        self.pool: Union[None, Pool] = None
+    def __init__(self, pool):
+        self.pool: Pool = pool
 
-    async def create(self):
-        self.pool = await asyncpg.create_pool(
+    @classmethod
+    async def create(cls):
+        pool = await asyncpg.create_pool(
             user=config.DB_USER,
             password=config.DB_PASS,
             database=config.DB_NAME,
             host=config.DB_HOST
         )
+        return cls(pool)
 
     async def execute(self, command, *args,
                       fetch: bool = False,
