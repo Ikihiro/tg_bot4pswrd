@@ -8,3 +8,7 @@ BOT_TOKEN = env.str("BOT_TOKEN")  # Забираем значение типа s
 ADMINS = env.list("ADMINS")  # Тут у нас будет список из админов
 IP = env.str("ip")  # Тоже str, но для айпи адреса хоста
 
+DB_NAME = env.str("DB_NAME")
+DB_PASS = env.str("DB_PASS")
+DB_HOST = env.str("DB_HOST")
+DB_USER = env.str("DB_USER")
