@@ -118,7 +118,7 @@ async def create_gen_pwd(message: types.Message, state: FSMContext):
     await state.finish()
 
 
-@dp.message_handler(state="ask_code_word")
+@dp.message_handler(state="ask_code_word", content_types=types.ContentType.ANY)
 async def err_site(message: types.Message):
     mood = "bad"
     sticker = await get_random_sticker(mood)
