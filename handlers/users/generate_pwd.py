@@ -30,7 +30,7 @@ async def get_gen_pwd(message: Union[types.Message, types.CallbackQuery], state:
     await state.finish()
     URL = "https://password.ninja/api/password?symbols=true&randCapitals=true"
     response = await get(URL)
-    pwd = response[0]
+    pwd = response[2:-3]
     text = f"Ваш пароль: <code>{pwd}</code>"
 
     if isinstance(message, types.Message):
