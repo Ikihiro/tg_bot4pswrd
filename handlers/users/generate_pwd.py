@@ -28,9 +28,9 @@ async def get(url):
 @dp.callback_query_handler(menu_cd.filter(code="to_gen_pwd"), state=["gen_pwd", "ask_code_word"])
 async def get_gen_pwd(message: Union[types.Message, types.CallbackQuery], state: FSMContext):
     await state.finish()
-    URL = "https://passwordinator.herokuapp.com?num=True&caps=True"
+    URL = "https://password.ninja/api/password?symbols=true&randCapitals=true"
     response = await get(URL)
-    pwd = response[9:-2]
+    pwd = response
     text = f"Ваш пароль: <code>{pwd}</code>"
 
     if isinstance(message, types.Message):
@@ -41,6 +41,7 @@ async def get_gen_pwd(message: Union[types.Message, types.CallbackQuery], state:
             data["gen_pwd"] = pwd
         call = message
         await call.answer()
+        print(text)
         await call.message.edit_text(
             text=text,
             reply_markup=gen_pwd_keyboards,
